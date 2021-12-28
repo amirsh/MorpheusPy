@@ -7,20 +7,20 @@ import morpheus.normalized_matrix as nm
 
 s = np.matrix([])
 
-join_set1 = np.genfromtxt('./data/LastFM/MLFK1.csv', skip_header=True, dtype=int)
-r1 = mmread('./data/LastFM/MLR1Sparse.txt',)
+join_set1 = np.genfromtxt('./data/BookCrossing/MLFK1.csv', skip_header=True, dtype=int)
+r1 = mmread('./data/BookCrossing/MLR1Sparse.txt',)
 
-join_set2 = np.genfromtxt('./data/LastFM/MLFK2.csv', skip_header=True, dtype=int)
-r2 = mmread('./data/LastFM/MLR2Sparse.txt',)
+join_set2 = np.genfromtxt('./data/BookCrossing/MLFK2.csv', skip_header=True, dtype=int)
+r2 = mmread('./data/BookCrossing/MLR2Sparse.txt',)
 
-Y = np.matrix(np.genfromtxt('./data/LastFM/MLY.csv', skip_header=True)).T
+Y = np.matrix(np.genfromtxt('./data/BookCrossing/MLY.csv', skip_header=True)).T
 k = [join_set1 - 1, join_set2 - 1]
 T = hstack((r1.tocsr()[k[0]], r2.tocsr()[k[1]]))
 
-# w_init = np.matrix(np.random.randn(T.shape[1], 1))
-# gamma = 0.000001
-iterations = 5
-# result_eps = 1e-6
+w_init = np.matrix(np.random.randn(T.shape[1], 1))
+gamma = 0.000001
+iterations = 20
+result_eps = 1e-6
 
 print "start factorized matrix"
 normalized_matrix = nm.NormalizedMatrix(s, [r1, r2], k)

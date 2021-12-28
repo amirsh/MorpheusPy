@@ -1,21 +1,21 @@
 from morpheus.algorithms.linear_regression import NormalizedLinearRegression
-
 import numpy as np
 from scipy.io import mmread
 from scipy.sparse import hstack
+
 import morpheus.normalized_matrix as nm
 
-s = np.matrix([])
+s = mmread('./data/Expedia/MLSSparse.txt')
 
-join_set1 = np.genfromtxt('./data/LastFM/MLFK1.csv', skip_header=True, dtype=int)
-r1 = mmread('./data/LastFM/MLR1Sparse.txt',)
+join_set1 = np.genfromtxt('./data/Expedia/MLFK1.csv', skip_header=True, dtype=int)
+r1 = mmread('./data/Expedia/MLR1Sparse.txt')
 
-join_set2 = np.genfromtxt('./data/LastFM/MLFK2.csv', skip_header=True, dtype=int)
-r2 = mmread('./data/LastFM/MLR2Sparse.txt',)
+join_set2 = np.genfromtxt('./data/Expedia/MLFK2.csv', skip_header=True, dtype=int)
+r2 = mmread('./data/Expedia/MLR2Sparse.txt')
 
-Y = np.matrix(np.genfromtxt('./data/LastFM/MLY.csv', skip_header=True)).T
 k = [join_set1 - 1, join_set2 - 1]
-T = hstack((r1.tocsr()[k[0]], r2.tocsr()[k[1]]))
+T = hstack((s, r1.tocsr()[k[0]], r2.tocsr()[k[1]]))
+Y = np.matrix(np.genfromtxt('./data/Expedia/MLY.csv', skip_header=True, dtype=int)).T
 
 # w_init = np.matrix(np.random.randn(T.shape[1], 1))
 # gamma = 0.000001
@@ -54,3 +54,4 @@ print "times for factorized are ", n_times
 print "average for materialized is ", np.average(m_times)
 print "average for factorized is ", np.average(n_times)
 print "average speedup is ", np.average(m_times) / np.average(n_times)
+

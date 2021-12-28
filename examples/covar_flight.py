@@ -5,25 +5,28 @@ from scipy.io import mmread
 from scipy.sparse import hstack
 import morpheus.normalized_matrix as nm
 
-s = np.matrix([])
+s = mmread('./data/Flights/MLSSparse.txt')
 
-join_set1 = np.genfromtxt('./data/LastFM/MLFK1.csv', skip_header=True, dtype=int)
-r1 = mmread('./data/LastFM/MLR1Sparse.txt',)
+join_set1 = np.genfromtxt('./data/Flights/MLFK1.csv', skip_header=True, dtype=int)
+r1 = mmread('./data/Flights/MLR1Sparse.txt')
 
-join_set2 = np.genfromtxt('./data/LastFM/MLFK2.csv', skip_header=True, dtype=int)
-r2 = mmread('./data/LastFM/MLR2Sparse.txt',)
+join_set2 = np.genfromtxt('./data/Flights/MLFK2.csv', skip_header=True, dtype=int)
+r2 = mmread('./data/Flights/MLR2Sparse.txt')
 
-Y = np.matrix(np.genfromtxt('./data/LastFM/MLY.csv', skip_header=True)).T
-k = [join_set1 - 1, join_set2 - 1]
-T = hstack((r1.tocsr()[k[0]], r2.tocsr()[k[1]]))
+join_set3 = np.genfromtxt('./data/Flights/MLFK3.csv', skip_header=True, dtype=int)
+r3 = mmread('./data/Flights/MLR3Sparse.txt')
+
+k = [join_set1 - 1, join_set2 - 1, join_set3 - 1]
+T = hstack((s, r1.tocsr()[k[0]], r2.tocsr()[k[1]], r3.tocsr()[k[2]]))
+Y = np.matrix(np.genfromtxt('./data/Flights/MLY.csv', skip_header=True, dtype=int)).T
 
 # w_init = np.matrix(np.random.randn(T.shape[1], 1))
 # gamma = 0.000001
-iterations = 5
+iterations = 1
 # result_eps = 1e-6
 
 print "start factorized matrix"
-normalized_matrix = nm.NormalizedMatrix(s, [r1, r2], k)
+normalized_matrix = nm.NormalizedMatrix(s, [r1, r2, r3], k)
 print "end factorized matrix"
 
 m_times = []
