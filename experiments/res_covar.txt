@@ -1,0 +1,30 @@
+start tesing cross product (m.T * m)
+Crossprod, feature ratio: 4 tuple ratio 1
+2617.4299716949463
+307.9151391983032
+Crossprod, feature ratio: 4 tuple ratio 5
+2645.376205444336
+101.8104076385498
+Crossprod, feature ratio: 4 tuple ratio 10
+2645.7287549972534
+56.87460899353027
+Crossprod, feature ratio: 4 tuple ratio 15
+2607.984685897827
+40.3627872467041
+Crossprod, feature ratio: 4 tuple ratio 20
+2605.2778244018555
+33.498501777648926
+Crossprod, feature ratio: 1 tuple ratio 10
+110.34631729125977
+34.169793128967285
+Crossprod, feature ratio: 2 tuple ratio 10
+482.9379081726074
+43.047499656677246
+Crossprod, feature ratio: 3 tuple ratio 10
+1302.2244215011597
+54.514145851135254
+Crossprod, feature ratio: 4 tuple ratio 10
+2621.931529045105
+56.14950656890869
+Crossprod, feature ratio: 5 tuple ratio 10
+4456.261491775513
