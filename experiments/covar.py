@@ -28,8 +28,8 @@ def run_covar(f, t):
     s = S_df[:,1:(ds+1)]
     k = [S_df[:,0]]
 
-    # T = np.hstack((s, r[0][k[0]]))
-    T = np.hstack((s, r[0][k[0]],r[0][k[0]]))
+    T = np.hstack((s, r[0][k[0]]))
+    # T = np.hstack((s, r[0][k[0]],r[0][k[0]]))
     # print T
     # print np.dot(T.T, T)
     normalized_matrix = nm.NormalizedMatrix(s, r, k)
@@ -47,11 +47,15 @@ def run_covar(f, t):
     print np.average(numpy_res)
     print np.average(morpheus_res)
 
+# for t in TS:
+# # for t in range(20, 21, 4):
+# # for t in range(2, 3, 4):
+#     run_covar(FIXED_F, t)
+
+# for f in FS:
+#     run_covar(f, FIXED_T)
+
+
 for t in TS:
-# for t in range(20, 21, 4):
-# for t in range(2, 3, 4):
-    run_covar(FIXED_F, t)
-
-for f in FS:
-    run_covar(f, FIXED_T)
-
+    for f in FS:
+        run_covar(f, t)

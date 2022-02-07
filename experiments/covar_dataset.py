@@ -4,7 +4,8 @@ import pandas as pd
 from covar_shared import * 
 
 
-ns = NS
+# ns = NS
+nr = NR
 # nr = 1000
 # nr = 10
 ds = DS
@@ -16,7 +17,8 @@ print "start generating dataset"
 def generate_dataset(f, t):
     print "feature ratio:", f, "tuple ratio", t
     dr = ds * f
-    nr = ns / t
+    # nr = ns / t
+    ns = nr * t
 
     s = np.random.randint(100, size=(ns, ds))
     r = np.random.randint(100, size=(nr, dr))
@@ -35,10 +37,14 @@ def generate_dataset(f, t):
     mat = np.hstack((idx, s))
     np.savetxt("data/S_%d_%d.csv" % (f, t), mat,"%d|" * ds + "%d")
 
-for t in TS:
-# for t in range(20, 21, 4):
-# for t in range(2, 3, 4):
-    generate_dataset(FIXED_F, t)
+# for t in TS:
+# # for t in range(20, 21, 4):
+# # for t in range(2, 3, 4):
+#     generate_dataset(FIXED_F, t)
 
-for f in FS:
-    generate_dataset(f, FIXED_T)
+# for f in FS:
+#     generate_dataset(f, FIXED_T)
+
+for t in TS:
+    for f in FS:
+        generate_dataset(f, t)
